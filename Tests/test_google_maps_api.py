@@ -1,9 +1,11 @@
 from utils.API import GoogleMapsApi
 from utils.checking import Checking
+import allure
 
+@allure.epic('Test create place')
 class TestCreatePlace:
     '''Изменение и удаление новой локации'''
-
+    @allure.description('Создание, изменение, удаление новой локации')
     def test_create_new_place(self):
         print('Метод POST')
         #result_post: Response = GoogleMapsApi.create_new_place()
