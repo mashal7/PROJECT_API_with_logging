@@ -7,6 +7,9 @@ def setup_logger():
     logger = logging.getLogger(__name__)
     logger.setLevel(logging.DEBUG)
 
+    # Убедимся, что папка 'logs' существует
+    os.makedirs('logs', exist_ok=True)      #  если директория уже существует, ошибка не будет выбрасываться
+
     # Создаем обработчик для записи логов в файл
     handler = logging.FileHandler(f'logs/log_{datetime.now().strftime("%Y-%m-%d_%H-%M-%S")}.log', 'w')
     handler.setLevel(logging.DEBUG)     # включает все события от отладочных до критических
@@ -35,4 +38,5 @@ def end_logs(logger, result):
 
     cookies = dict(result.cookies)
     headers = dict(result.headers)
-    logger.info(f'Response code: {result.status_code}\nResponse text: {result.text}\nResponse headers: {headers}\nResponse cookies: {cookies}\n')
+    logger.info(f'Response code: {result.status_code}\nResponse text: {result.text}\nResponse headers: {headers}\nResponse cookies: {cookies}\n'
+                f'----------------------------------------------------------------------------------------\n')
