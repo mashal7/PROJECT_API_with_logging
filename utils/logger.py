@@ -9,7 +9,7 @@ def setup_logger():
 
     # Создаем обработчик для записи логов в файл
     handler = logging.FileHandler(f'logs/log_{datetime.now().strftime("%Y-%m-%d_%H-%M-%S")}.log', 'w')
-    handler.setLevel(logging.DEBUG)
+    handler.setLevel(logging.DEBUG)     # включает все события от отладочных до критических
 
     # Форматирование логов
     formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
@@ -23,7 +23,10 @@ def setup_logger():
 def start_logs(logger, url, method):
     '''Логи перед началом теста'''
 
+    # использует переменную окружения PYTEST_CURRENT_TEST,
+    # которая доступна при запуске с pytest
     test_name = os.environ.get('PYTEST_CURRENT_TEST')
+
     logger.info(f'-----\nTest: {test_name}\nRequest method: {method}\nRequest URL: {url}\n')
 
 
